@@ -66,8 +66,7 @@ This training focuses on running terraform code for the Microsoft Windows operat
     + Terraform: https://releases.hashicorp.com/terraform/1.0.5/terraform_1.0.5_windows_amd64.zip
     + Terragrunt: https://github.com/gruntwork-io/terragrunt/releases/download/v0.31.8/terragrunt_windows_amd64.exe
 &nbsp;      
-- Create app folder.
-  Create a new folder for terraform as 'C:\Bespin\Terraform' and Go to the folder.
+- Create app folder: Create a new folder for terraform as 'C:\Bespin\Terraform' and Go to the folder.
   ```powershell
   PS C:\> New-Item -ItemType Directory -Force -Path "C:\Bespin\Terraform"
   ```
@@ -76,8 +75,7 @@ This training focuses on running terraform code for the Microsoft Windows operat
     + Terragrunt: terragrunt file **rename** to 'terragrunt.exe'
     + This path is used as an example. However, you can also the Terraform executable to any other location in your local system.
 &nbsp;
-- Update path
-  Update the path environment variable to include the folder where your Terraform executable is located.
+- Update path: Update the path environment variable to include the folder where your Terraform executable is located.
     + Command Line
       - Run Powershell as Administrator
         ```powershell
@@ -98,7 +96,7 @@ This training focuses on running terraform code for the Microsoft Windows operat
       - Add the path to the folder where your Terraform executable is located like 'C:\Bespin\Terraform'.
 
 - Confirm version
-  To verify, open another Powershell. 
+To verify, open another Powershell. 
   ```powershell
   PS C:\> terraform --version
   Terraform v1.0.5
@@ -111,15 +109,14 @@ This training focuses on running terraform code for the Microsoft Windows operat
 ##### Disadvantages of using Windows
 The base environment of Terraform is UNIX. It make some trouble when running on windows.
 
-  - 260 characters
-    In the Windows, the maximum length for a path is MAX_PATH, which is defined as 260 characters.
-    In the Linux has a maximum path of 4096 characters.
-    When doing a terragrunt plan, Terragrunt tries to copy artifacts to the .terragrunt-cache folder which adds what I presume is the hash of the files as the folder name. Eventually, it might be exceed the maximum length of the windows.
-  - state push
-    On Windows, terraform state pull > terraform.tfstate results in a file with Windows (\r\n) line endings. But terraform state mv requires Unix-style (\n) line endings.
-    The state push command will fail if they contain (\r\n) line endings as shown blow.
-  - no color
-    The Windows has no support for VT(Virtual Terminal)/ANSI escape codes. It cause that weird control characters show up in the output if you are using terragrunt or old terraform.   
+  - 260 characters: In the Windows, the maximum length for a path is MAX_PATH, which is defined as 260 characters. In the Linux has a maximum path of 4096 characters.
+  &nbsp;
+  When doing a terragrunt plan, Terragrunt tries to copy artifacts to the .terragrunt-cache folder which adds what I presume is the hash of the files as the folder name. Eventually, it might be exceed the maximum length of the windows.
+  &nbsp;
+  - state push: On Windows, terraform state pull > terraform.tfstate results in a file with Windows (\r\n) line endings. But terraform state mv requires Unix-style (\n) line endings.
+  The state push command will fail if they contain (\r\n) line endings as shown blow.
+  &nbsp;
+  - no color: The Windows has no support for VT(Virtual Terminal)/ANSI escape codes. It cause that weird control characters show up in the output if you are using terragrunt or old terraform.   
     ```powershell
     An execution plan has been generated and is shown below.
     Resource actions are indicated with the following symbols:
@@ -150,8 +147,7 @@ The base environment of Terraform is UNIX. It make some trouble when running on 
     $ wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.31.8/terragrunt_linux_amd64
     $ unzip terraform_1.0.5_linux_amd64.zip
     ```
-  - Install package
-  Give binary executable permissions and install (will overwrite current version)
+  - Install package: Give binary executable permissions and install (will overwrite current version)
     ```bash
     $ chmod +x terraform
     $ chmod +x terragrunt_linux_amd64
@@ -169,10 +165,8 @@ The base environment of Terraform is UNIX. It make some trouble when running on 
 ## Install AWS CLI
 
 ##### Install the AWS CLI version 2 on Windows using the MSI installer
-  - Get latest version
-    Download the AWS CLI MSI installer for Windows(64-bit): https://awscli.amazonaws.com/AWSCLIV2.msi 
-  - Install
-    Run the downloaded MSI installer and follow the on-screen instructions. By default, the AWS CLI installs to C:\Program Files\Amazon\AWSCLIV2.
+  - Get latest version: Download the AWS CLI MSI installer for Windows(64-bit): https://awscli.amazonaws.com/AWSCLIV2.msi 
+  - Install: Run the downloaded MSI installer and follow the on-screen instructions. By default, the AWS CLI installs to C:\Program Files\Amazon\AWSCLIV2.
   - Confirm version
     ```powershell
     PS C:\> aws --version
@@ -199,20 +193,17 @@ docs: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.ht
 ## What is Remote state
 By default, Terraform stores state locally in a file named **terraform.tfstate**. 
 
-- Teamwork
-  When working with Terraform in a team, use of a local file makes Terraform usage complicated because each user must make sure they always have the latest state data before running Terraform and make sure that nobody else runs Terraform at the same time.
-  With remote state, Terraform writes the state data to a remote data store, which can then be shared between all members of a team. 
-- Locking
-  For fully-featured remote backends, Terraform can also use state locking to prevent concurrent runs of Terraform against the same state.
-- Sharing
-  Remote state allows you to share output values with other configurations via a terraform_remote_state data source. 
-  This allows your infrastructure to be decomposed into smaller components.
-- S3 backend
-  S3 backend stores the state as a given key in a given bucket on Amazon S3. This backend also supports state locking and consistency checking via Dynamo DB.
-  | LockID                                                        | Digest                           |
-  |---------------------------------------------------------------|----------------------------------|
-  | state-bucket/eu-west-1/network/terraform.tfstate-md5          | 5e201f09154779adg0736459805df1ac |
-  | state-bucket/us-east-1/alarm-cloudwatch/terraform.tfstate-md5 | 8ec543f37cc85c9b63dc2cf645f9254a |
+- Teamwork: When working with Terraform in a team, use of a local file makes Terraform usage complicated because each user must make sure they always have the latest state data before running Terraform and make sure that nobody else runs Terraform at the same time.
+&nbsp;
+With remote state, Terraform writes the state data to a remote data store, which can then be shared between all members of a team. 
+&nbsp;
+- Locking: For fully-featured remote backends, Terraform can also use state locking to prevent concurrent runs of Terraform against the same state.
+&nbsp;
+- Sharing: Remote state allows you to share output values with other configurations via a terraform_remote_state data source. 
+&nbsp;
+This allows your infrastructure to be decomposed into smaller components.
+&nbsp;
+- S3 backend: S3 backend stores the state as a given key in a given bucket on Amazon S3. This backend also supports state locking and consistency checking via Dynamo DB.
   ```hcl
   remote_state {
     backend = "s3"
@@ -235,14 +226,11 @@ docs: https://www.terraform.io/docs/language/settings/backends/s3.html
 
 
 ## Useful Commands Options
-  - terraform apply -auto-approve
-    **-auto-approve**: Skip interactive approval of plan before applying.
-  &nbsp;
-  - terraform plan -no-color
-    **-no-color**: Disables output with coloring. Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
-  &nbsp;
-  - terragrunt plan --terragrunt-source c:\deploy\temp\ 
-    **--terragrunt-source**: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. 
+- terraform apply **-auto-approve**: Skip interactive approval of plan before applying.
+&nbsp;
+- terraform plan **-no-color**: Disables output with coloring. Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
+&nbsp;
+- terragrunt plan **--terragrunt-source** c:\deploy\temp\: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. 
 
 
 
