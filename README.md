@@ -31,8 +31,8 @@
 
 
 ## Terraform Versions
-Releases Terraform : https://releases.hashicorp.com/terraform
-Releases Terragrunt: https://github.com/gruntwork-io/terragrunt/releases
+- Releases Terraform : https://releases.hashicorp.com/terraform
+- Releases Terragrunt: https://github.com/gruntwork-io/terragrunt/releases
 
 | Version | Release    | AWS Provider  |
 |---------|------------|---------------|
@@ -45,11 +45,15 @@ Releases Terragrunt: https://github.com/gruntwork-io/terragrunt/releases
 | 0.10    | 2017-08-03 | 2.70.0        |
 | 0.09    | 2017-03-16 | 2.70.0        |
 
-The recommended version is above 0.12. Terraform v0.12 is incompatible with previous versions of terraform. Terraform 0.12 introduced a new type system for the Terraform language, and with it some changes to the representations of configuration, state, and plans.
+The recommended version is above 0.12. 
+Terraform v0.12 is incompatible with previous versions of terraform. Terraform 0.12 introduced a new type system for the Terraform language, and with it some changes to the representations of configuration, state, and plans.
+
 Announcing HashiCorp dropped support for Terraform 0.11 and below.
+
 Version 3.0.0 and later of the AWS Provider can only be automatically installed on Terraform 0.12 and later.
 
 docs: https://www.terraform.io/upgrade-guides/0-12.html
+
 docs: https://www.hashicorp.com/blog/deprecating-terraform-0-11-support-in-terraform-providers
 
 
@@ -71,8 +75,6 @@ This training focuses on running terraform code for the Microsoft Windows operat
     + Terrform: extract the package to the folder 'C:\Bespin\Terraform'.
     + Terragrunt: terragrunt file **rename** to 'terragrunt.exe'
     + This path is used as an example. However, you can also the Terraform executable to any other location in your local system.
-      The following is example of install packages.  
-    ![Installing](https://bespin-terraform-training.s3.ap-northeast-2.amazonaws.com/img/install_package.png)
 &nbsp;
 - Update path
   Update the path environment variable to include the folder where your Terraform executable is located.
@@ -144,9 +146,9 @@ The base environment of Terraform is UNIX. It make some trouble when running on 
 ##### Linux
   - Get specific version
     ```bash
-    $ wget https://releases.hashicorp.com/terraform/0.12.31/terraform_0.12.31_linux_amd64.zip
-    $ wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.21.6/terragrunt_linux_amd64
-    $ unzip terraform_0.12.31_linux_amd64.zip
+    $ wget https://releases.hashicorp.com/terraform/1.0.5/terraform_1.0.5_linux_amd64.zip
+    $ wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.31.8/terragrunt_linux_amd64
+    $ unzip terraform_1.0.5_linux_amd64.zip
     ```
   - Install package
   Give binary executable permissions and install (will overwrite current version)
@@ -227,17 +229,20 @@ By default, Terraform stores state locally in a file named **terraform.tfstate**
   ```
 
 docs: https://www.terraform.io/docs/language/state/remote-state-data.html
+
 docs: https://www.terraform.io/docs/language/settings/backends/s3.html
 
 
 
 ## Useful Commands Options
   - terraform apply -auto-approve
-  **-auto-approve**: Skip interactive approval of plan before applying.
+    **-auto-approve**: Skip interactive approval of plan before applying.
+  &nbsp;
   - terraform plan -no-color
-  **-no-color**: Disables output with coloring. Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
+    **-no-color**: Disables output with coloring. Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
+  &nbsp;
   - terragrunt plan --terragrunt-source c:\deploy\temp\ 
-  **--terragrunt-source**: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. 
+    **--terragrunt-source**: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. 
 
 
 
