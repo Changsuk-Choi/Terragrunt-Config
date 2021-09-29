@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/Changsuk-Choi/Terragrunt-Template.git//aws/lambda-monitor-s3?ref=lambda-monitor-s3-v1.0.0"
+  source = "git::https://github.com/Changsuk-Choi/Terragrunt-Template.git//aws/lambda-s3?ref=lambda-s3-v1.0.0"
 }
 
 include {
@@ -10,5 +10,3 @@ include {
 inputs = {
   schedule_expression = "cron(00 8 * * ? *)"
 }
-
-

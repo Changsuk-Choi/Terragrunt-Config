@@ -15,11 +15,9 @@
     + resource lifecycle more efficient
     + able to tracking changes
     + CLI workflow: terraform init - terraform plan - terraform apply
-&nbsp;
 - Keyword of Terragrunt
     + Keep your Terraform code DRY
     + Execute Terraform commands on multiple modules at once
-&nbsp;
 - Terraform Best Practices
     + Manage multiple Terraform modules and environments easily with Terragrunt
     + Manage S3 backend for tfstate files
@@ -109,13 +107,8 @@ To verify, open another Powershell.
 ##### Disadvantages of using Windows
 The base environment of Terraform is UNIX. It make some trouble when running on windows.
 
-  - 260 characters: In the Windows, the maximum length for a path is MAX_PATH, which is defined as 260 characters. In the Linux has a maximum path of 4096 characters.
-  &nbsp;
-  When doing a terragrunt plan, Terragrunt tries to copy artifacts to the .terragrunt-cache folder which adds what I presume is the hash of the files as the folder name. Eventually, it might be exceed the maximum length of the windows.
-  &nbsp;
-  - state push: On Windows, terraform state pull > terraform.tfstate results in a file with Windows (\r\n) line endings. But terraform state mv requires Unix-style (\n) line endings.
-  The state push command will fail if they contain (\r\n) line endings as shown blow.
-  &nbsp;
+  - 260 characters: In the Windows, the maximum length for a path is MAX_PATH, which is defined as 260 characters. In the Linux has a maximum path of 4096 characters.When doing a terragrunt plan, Terragrunt tries to copy artifacts to the .terragrunt-cache folder which adds what I presume is the hash of the files as the folder name. Eventually, it might be exceed the maximum length of the windows.
+  - state push: On Windows, terraform state pull > terraform.tfstate results in a file with Windows (\r\n) line endings. But terraform state mv requires Unix-style (\n) line endings. The state push command will fail if they contain (\r\n) line endings as shown blow.
   - no color: The Windows has no support for VT(Virtual Terminal)/ANSI escape codes. It cause that weird control characters show up in the output if you are using terragrunt or old terraform.   
     ```powershell
     An execution plan has been generated and is shown below.
@@ -193,16 +186,9 @@ docs: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.ht
 ## What is Remote state
 By default, Terraform stores state locally in a file named **terraform.tfstate**. 
 
-- Teamwork: When working with Terraform in a team, use of a local file makes Terraform usage complicated because each user must make sure they always have the latest state data before running Terraform and make sure that nobody else runs Terraform at the same time.
-&nbsp;
-With remote state, Terraform writes the state data to a remote data store, which can then be shared between all members of a team. 
-&nbsp;
+- Teamwork: When working with Terraform in a team, use of a local file makes Terraform usage complicated because each user must make sure they always have the latest state data before running Terraform and make sure that nobody else runs Terraform at the same time.With remote state, Terraform writes the state data to a remote data store, which can then be shared between all members of a team. 
 - Locking: For fully-featured remote backends, Terraform can also use state locking to prevent concurrent runs of Terraform against the same state.
-&nbsp;
-- Sharing: Remote state allows you to share output values with other configurations via a terraform_remote_state data source. 
-&nbsp;
-This allows your infrastructure to be decomposed into smaller components.
-&nbsp;
+- Sharing: Remote state allows you to share output values with other configurations via a terraform_remote_state data source. This allows your infrastructure to be decomposed into smaller components.
 - S3 backend: S3 backend stores the state as a given key in a given bucket on Amazon S3. This backend also supports state locking and consistency checking via Dynamo DB.
   ```hcl
   remote_state {
@@ -227,9 +213,7 @@ docs: https://www.terraform.io/docs/language/settings/backends/s3.html
 
 ## Useful Commands Options
 - terraform apply **-auto-approve**: Skip interactive approval of plan before applying.
-&nbsp;
-- terraform plan **-no-color**: Disables output with coloring. Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
-&nbsp;
+- terraform plan **-no-color**: Disables output with coloring. On Windows, Default Settting no support for VT100 escape codes. -no-color flag would be help this cases.
 - terragrunt plan **--terragrunt-source** c:\deploy\temp\: Download Terraform configurations from the specified source into a temporary folder, and run Terraform in that temporary folder. 
 
 
